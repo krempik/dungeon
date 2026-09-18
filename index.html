@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dungeon of the Void — 2D данджон</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game-shell">
+    <div id="hud">
+      <div id="hud-left">
+        <div id="bar-hp" class="bar"><span class="bar-fill hp"></span><span class="bar-text"></span></div>
+        <div id="bar-mp" class="bar"><span class="bar-fill mp"></span><span class="bar-text"></span></div>
+        <div id="bar-xp" class="bar thin"><span class="bar-fill xp"></span><span class="bar-text"></span></div>
+        <div id="hud-stats">
+          <span class="stat" data-stat="level"></span>
+          <span class="stat" data-stat="gold"></span>
+          <span class="stat" data-stat="floor"></span>
+          <span class="stat" data-stat="kills"></span>
+        </div>
+      </div>
+      <div id="hud-right">
+        <div id="minimap-canvas-wrap"><canvas id="minimap"></canvas></div>
+        <div class="music-btns">
+          <button id="btn-sound" class="icon-btn" title="Звук">♪</button>
+          <button id="btn-music" class="icon-btn" title="Музыка">♫</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="main-wrap">
+      <canvas id="game"></canvas>
+
+      <!-- Floating messages -->
+      <div id="float-layer"></div>
+
+      <!-- Overlays -->
+      <div id="overlay" class="overlay hidden">
+        <div id="panel"></div>
+      </div>
+
+      <!-- Hotbar / ability bar -->
+      <div id="hotbar">
+        <div id="slot-abilities"></div>
+        <div id="slot-potions"></div>
+      </div>
+
+      <!-- Boss / floor banners -->
+      <div id="banner" class="hidden"></div>
+    </div>
+
+    <div id="toast-wrap"></div>
+  </div>
+
+  <!-- Scripts, dependency order matters -->
+  <script src="js/util.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/worldgen.js"></script>
+  <script src="js/entities.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
