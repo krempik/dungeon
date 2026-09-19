@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Headless harness for tools/run_tests.js in a browser (no node needed).
+     Load the pure modules + the spec and report pass/fail into the title,
+     which msedge --headless=new --dump-dom prints on stdout. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>running</title>
+</head>
+<body>
+  <script src="../js/util.js"></script>
+  <script src="../js/worldgen.js"></script>
+  <script src="../js/entities.js"></script>
+  <script src="run_tests.js"></script>
+  <script>
+    'use strict';
+    const hooks = {
+      expr: (src) => (0, eval)(src),
+      set: (name, value) => { globalThis[name] = value; },
+      read: () => { throw new Error('version check is node-only'); },
+    };
+    try {
+      const { buildSpec } = globalThis.dungeonSpec;
+      const cases = buildSpec(hooks);
+      let pass = 0;
+      const fails = [];
+      for (const c of cases) {
+        try {
+          c.fn();
+          pass++;
+        } catch (err) {
+          fails.push(c.name + ' :: ' + (err && err.message || err));
+        }
+      }
+      const fail = fails.length;
+      const tag = pass + ' passed, ' + fail + ' failed' + (fails.length ? '\n\n' + fails.join('\n') : '');
+      document.body.textContent = tag;
+      document.title = tag.split('\n')[0];
+    } catch (err) {
+      document.body.textContent = 'HARNESS ERROR: ' + (err && err.stack || err);
+      document.title = 'HARNESS ERROR';
+    }
+  </script>
+</body>
+</html>
